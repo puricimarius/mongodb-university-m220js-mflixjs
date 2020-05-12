@@ -62,7 +62,7 @@ export default class UsersDAO {
       // Use a more durable Write Concern for this operation.
 
       const { name, email, password } = userInfo
-      await users.insertOne({ name, email, password })
+      await users.insertOne({ name, email, password }, { w: "majority"})
       return { success: true }
     } catch (e) {
       if (String(e).startsWith("MongoError: E11000 duplicate key error")) {
